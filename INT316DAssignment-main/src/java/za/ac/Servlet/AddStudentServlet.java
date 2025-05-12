@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import za.ac.sessions.*;
 import za.ac.models.*;
+import java.util.Exception;
 
 /**
  *
@@ -26,8 +27,16 @@ public class AddStudentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        try{
+            
         Student stud = new Student();
+        }
+        catch(Exception e)
+            {
+              request.setAttribute("error","Error occured and failed to add student");
+            RequestDispatcher rd = request.getRequestDispatcher("error_page.jsp");
+             rd.forward(request, response);
+            }
        
     }
 
