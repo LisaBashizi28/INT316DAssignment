@@ -29,28 +29,28 @@ public class AddStudentServlet extends HttpServlet {
             // Receive and parse input
             Double amount = Double.parseDouble(request.getParameter("amountBalance"));
             String studentId = request.getParameter("studentId");
-            Long schoolId = Long.parseLong(request.getParameter("school")); // assuming school is sent as ID
+            Long schoolId = Long.parseLong(request.getParameter("school")); 
 
-            // Fetch the School entity from DB
+            
             School school = schoolFacade.find(schoolId);
 
-            // Create and populate Student
+           
             Student student = new Student();
             student.setStudentId(studentId);
             student.setAccountBalance(amount);
             student.setSchool(school);
 
-            // Persist student
+           
             studentFacade.create(student);
 
-            // Set success message
+           
             request.setAttribute("message", "Student added successfully.");
         } catch (Exception e) {
             // Handle errors
             request.setAttribute("message", "Error adding student: " + e.getMessage());
         }
 
-        // Forward to JSP confirmation page
+        
         request.getRequestDispatcher("confirmation.jsp").forward(request, response);
     }
 }
